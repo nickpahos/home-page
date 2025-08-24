@@ -1,103 +1,156 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useEffect, useState } from 'react';
+import { Container, Grid, Stack, Title, Group, Badge, Text, ActionIcon, Tooltip } from '@mantine/core';
+import { IconSettings } from '@tabler/icons-react';
+import { Clock } from '@/components/Clock';
+import { SearchBar } from '@/components/SearchBar';
+import { MarketWatch } from '@/components/MarketWatch';
+import { LinkSection } from '@/components/LinkSection';
+import { ConfigEditor } from '@/components/ConfigEditor';
+import { getConfig, AppConfig } from '@/lib/config';
+
+export default function HomePage() {
+  const [config, setConfig] = useState<AppConfig>(getConfig());
+  const [configEditorOpened, setConfigEditorOpened] = useState(false);
+
+  useEffect(() => {
+    // Update config when localStorage changes
+    const handleStorageChange = () => {
+      setConfig(getConfig());
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  const handleConfigChange = (newConfig: AppConfig) => {
+    setConfig(newConfig);
+  };
+
+  const linkCategories = [
+    {
+      id: 'reddit',
+      title: 'Reddit',
+      links: config.links.reddit,
+      color: 'red',
+      icon: '📱',
+    },
+    {
+      id: 'steam',
+      title: 'Steam',
+      links: config.links.steam,
+      color: 'blue',
+      icon: '🎮',
+    },
+    {
+      id: 'work',
+      title: 'Work',
+      links: config.links.work,
+      color: 'green',
+      icon: '💼',
+    },
+    {
+      id: 'github',
+      title: 'GitHub',
+      links: config.links.github,
+      color: 'gray',
+      icon: '🐙',
+    },
+    {
+      id: 'personal',
+      title: 'Personal',
+      links: config.links.personal,
+      color: 'violet',
+      icon: '⭐',
+    },
+  ];
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <Container size="xl" py="xl" style={{ minHeight: '100vh' }}>
+      {/* Header */}
+      <Stack align="center" mb="xl" pos="relative">
+        <Title order={1} size="4rem" className="text-glow" ta="center">
+          HOME HUB
+        </Title>
+        <Group gap="xs">
+          <Badge variant="outline" color="violet" size="lg">
+            PS1 ERA
+          </Badge>
+          <Badge variant="outline" color="blue" size="lg">
+            LOFI VIBES
+          </Badge>
+          <Badge variant="outline" color="green" size="lg">
+            RETRO
+          </Badge>
+        </Group>
+        
+        {/* Settings Button */}
+        <Tooltip label="Customize your dashboard" position="bottom">
+          <ActionIcon
+            size="lg"
+            variant="light"
+            color="violet"
+            onClick={() => setConfigEditorOpened(true)}
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+            }}
+            className="retro-button"
+          >
+            <IconSettings size={20} />
+          </ActionIcon>
+        </Tooltip>
+      </Stack>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Clock and Search */}
+      <Grid mb="xl">
+        <Grid.Col span={{ base: 12, md: 8 }}>
+          <Clock />
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 4 }}>
+          <SearchBar />
+        </Grid.Col>
+      </Grid>
+
+      {/* Market Watch */}
+      <Grid mb="xl">
+        <Grid.Col span={12}>
+          <MarketWatch />
+        </Grid.Col>
+      </Grid>
+
+      {/* Link Sections */}
+      <Grid gutter="lg">
+        {linkCategories.map((category) => (
+          <Grid.Col key={category.id} span={{ base: 12, sm: 6, lg: 4 }}>
+            <LinkSection
+              title={category.title}
+              links={category.links}
+              color={category.color}
+              icon={category.icon}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          </Grid.Col>
+        ))}
+      </Grid>
+
+      {/* Footer */}
+      <Stack align="center" mt="xl" mb="md">
+        <Text size="sm" c="dimmed" ta="center">
+          Your personalized information hub with a nostalgic PS1-era aesthetic
+        </Text>
+        <Text size="xs" c="dimmed" ta="center">
+          Built with Next.js, Mantine, and retro love
+        </Text>
+      </Stack>
+
+      {/* Configuration Editor */}
+      <ConfigEditor
+        opened={configEditorOpened}
+        onClose={() => setConfigEditorOpened(false)}
+        onConfigChange={handleConfigChange}
+      />
+    </Container>
   );
 }
