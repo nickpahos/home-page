@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
 
 html,
 body {
@@ -12,28 +7,14 @@ body {
   overflow-x: hidden;
   height: 100vh;
   font-family: 'Share Tech Mono', monospace;
+  margin: 0;
+    padding: 0;
 }
 
 body {
-  color: #e0e0e0;
-  background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-  position: relative;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  background: radial-gradient(circle, #222250, #0e0e0f);
+    background-size: cover;
+    background-color: #30304b;
 }
 
 /* PS1-era scanline effect */
@@ -53,28 +34,6 @@ body::before {
   z-index: 1;
 }
 
-/* Retro terminal cursor effect */
-@keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
-    opacity: 0;
-  }
-}
-
-.cursor-blink::after {
-  content: '|';
-  animation: blink 1s infinite;
-  color: #00ff00;
-  font-weight: bold;
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -89,94 +48,8 @@ body::before {
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
 
-/* Selection styling */
-::selection {
-  background: rgba(0, 255, 0, 0.3);
-  color: #ffffff;
-}
 
-/* Focus outline for accessibility */
-*:focus {
-  outline: 2px solid #00ff00;
-  outline-offset: 2px;
-}
 
-/* Retro text glow effect */
-.text-glow {
-  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-}
 
-/* Pixelated border effect */
-.pixel-border {
-  border: 2px solid;
-  border-image: linear-gradient(45deg, #00ff00, #008000) 1;
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 255, 0, 0.3),
-    0 0 20px rgba(0, 255, 0, 0.2);
-}
 
-/* Scanline overlay for cards */
-.scanline-overlay {
-  position: relative;
-}
-
-.scanline-overlay::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(0deg,
-      transparent,
-      transparent 1px,
-      rgba(0, 255, 0, 0.05) 1px,
-      rgba(0, 255, 0, 0.05) 2px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Retro button hover effect */
-.retro-button:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(0, 255, 0, 0.4);
-  transition: all 0.2s ease;
-}
-
-/* Market data ticker animation */
-@keyframes ticker {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.ticker {
-  animation: ticker 20s linear infinite;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-  }
-    .pixel-border {
-      border-width: 1px;
-  }
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
-    }
-}

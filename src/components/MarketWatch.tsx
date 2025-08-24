@@ -29,7 +29,7 @@ export function MarketWatch() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 30000); // Update every 30 seconds
+    const interval = setInterval(fetchData, 30000);
 
     return () => clearInterval(interval);
   }, [config.watchlist.stocks, config.watchlist.crypto]);
@@ -47,7 +47,7 @@ export function MarketWatch() {
   };
 
   const MarketItemCard = ({ item }: { item: MarketItem }) => (
-    <Card p="sm" className="scanline-overlay">
+    <Card p="sm" bg="transparent">
       <Group justify="space-between" align="center">
         <div>
           <Text size="sm" fw={600} className="text-glow">
@@ -75,7 +75,7 @@ export function MarketWatch() {
 
   if (loading) {
     return (
-      <Card p="md" className="scanline-overlay">
+      <Card p="md" bg="transparent">
         <Title order={3} size="h4" mb="md">
           📈 Market Watch
         </Title>
@@ -87,7 +87,7 @@ export function MarketWatch() {
   }
 
   return (
-    <Card p="md" className="scanline-overlay">
+    <Card p="md" bg="transparent">
       <Title order={3} size="h4" mb="md">
         📈 Market Watch
       </Title>

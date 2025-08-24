@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Title, Text, Group, Badge, Stack } from '@mantine/core';
+import { Card, Title, Text, Group, Badge, Stack, Divider } from '@mantine/core';
 import { LinkItem } from '@/types';
 
 interface LinkSectionProps {
@@ -16,15 +16,12 @@ export function LinkSection({ title, links, color, icon }: LinkSectionProps) {
   };
 
   return (
-    <Card p="md" className="scanline-overlay">
+    <Card p="md" bg="transparent">
       <Group justify="space-between" align="center" mb="md">
         <Title order={3} size="h4">
           {icon && <span style={{ marginRight: '0.5rem' }}>{icon}</span>}
           {title}
         </Title>
-        <Badge variant="outline" color={color}>
-          {links.length}
-        </Badge>
       </Group>
       
       <Stack gap="xs">
@@ -43,6 +40,7 @@ export function LinkSection({ title, links, color, icon }: LinkSectionProps) {
             tabIndex={0}
             role="button"
             aria-label={`Open ${link.title}`}
+            bg="transparent"
           >
             <Group justify="space-between" align="center">
               <div>
@@ -55,9 +53,6 @@ export function LinkSection({ title, links, color, icon }: LinkSectionProps) {
                   </Text>
                 )}
               </div>
-              <Badge size="xs" variant="light" color={color}>
-                →
-              </Badge>
             </Group>
           </Card>
         ))}

@@ -47,107 +47,30 @@ export const theme: MantineThemeOverride = {
     ],
   },
   components: {
-    Card: {
-      defaultProps: {
-        radius: 'md',
-        withBorder: true,
-      },
-      styles: {
-        root: {
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
-          backdropFilter: 'blur(10px)',
-          border: '2px solid #7c3aed',
-          boxShadow: '0 0 20px rgba(139, 69, 19, 0.3)',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'translateY(-2px)',
-            boxShadow: '0 4px 20px rgba(139, 69, 19, 0.5)',
-          },
-        },
-      },
-    },
-    Button: {
-      defaultProps: {
-        radius: 'md',
-        size: 'md',
-      },
-      styles: {
-        root: {
-          fontFamily: 'Orbitron, sans-serif',
-          fontWeight: '600',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          border: '2px solid #7c3aed',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          backdropFilter: 'blur(5px)',
-          transition: 'all 0.2s ease',
-          '&:hover': {
-            backgroundColor: '#7c3aed',
-            transform: 'translateY(-2px)',
-            boxShadow: '0 4px 15px #7c3aed',
-          },
-        },
-      },
-    },
-    Paper: {
-      defaultProps: {
-        radius: 'md',
-        withBorder: true,
-      },
-      styles: {
-        root: {
-          backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(8px)',
-          border: '1px solid #a855f7',
-          boxShadow: '0 0 15px rgba(139, 69, 19, 0.2)',
-        },
-      },
-    },
     Text: {
       styles: {
         root: {
-          color: '#e0e0e0',
-          textShadow: '0 0 5px rgba(255, 255, 255, 0.1)',
+          color: '#f3f4f6',
+          textShadow: '0 0 5px rgba(255, 255, 255, 0.2)',
         },
       },
     },
     Title: {
       styles: {
         root: {
-          color: '#d8b4fe',
-          textShadow: '0 0 10px #7c3aed',
+          color: '#e9d5ff',
+          textShadow: '0 0 15px #7c3aed',
           letterSpacing: '0.02em',
         },
       },
     },
-    Badge: {
-      defaultProps: {
-        radius: 'sm',
-        size: 'md',
-      },
+    Container: {
       styles: {
         root: {
-          fontFamily: 'Orbitron, sans-serif',
-          fontWeight: '600',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          border: '1px solid #7c3aed',
-          color: '#d8b4fe',
-        },
-      },
-    },
-    Group: {
-      styles: {
-        root: {
-          gap: '1rem',
-        },
-      },
-    },
-    Stack: {
-      styles: {
-        root: {
-          gap: '1rem',
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '1rem',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
         },
       },
     },

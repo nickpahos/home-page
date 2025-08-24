@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Paper, Title, Text, Group } from '@mantine/core';
+import { Paper, Title, Text, Group, Container, Card } from '@mantine/core';
 import { getCurrentTime, ClockData } from '@/lib/clock';
 
 export function Clock() {
@@ -16,7 +16,7 @@ export function Clock() {
   }, []);
 
   return (
-    <Paper p="lg" className="scanline-overlay">
+    <Paper bg="transparent">
       <Group justify="center" align="center" gap="xs">
         <Title order={1} size="3rem" className="text-glow">
           {timeData.time}

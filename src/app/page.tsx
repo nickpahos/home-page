@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Container, Grid, Stack, Title, Group, Badge, Text, ActionIcon, Tooltip } from '@mantine/core';
+import { Container, Grid, Stack, Title, Group, Badge, Text, ActionIcon, Tooltip, SimpleGrid } from '@mantine/core';
 import { IconSettings } from '@tabler/icons-react';
 import { Clock } from '@/components/Clock';
 import { SearchBar } from '@/components/SearchBar';
@@ -15,7 +15,6 @@ export default function HomePage() {
   const [configEditorOpened, setConfigEditorOpened] = useState(false);
 
   useEffect(() => {
-    // Update config when localStorage changes
     const handleStorageChange = () => {
       setConfig(getConfig());
     };
@@ -67,24 +66,18 @@ export default function HomePage() {
   ];
 
   return (
-    <Container size="xl" py="xl" style={{ minHeight: '100vh' }}>
+    <Container size="xl" py="xl" style={{ minHeight: '100vh', border: 'none' }} bg="transparent">
       {/* Header */}
       <Stack align="center" mb="xl" pos="relative">
-        <Title order={1} size="4rem" className="text-glow" ta="center">
-          HOME HUB
-        </Title>
-        <Group gap="xs">
-          <Badge variant="outline" color="violet" size="lg">
-            PS1 ERA
-          </Badge>
-          <Badge variant="outline" color="blue" size="lg">
-            LOFI VIBES
-          </Badge>
-          <Badge variant="outline" color="green" size="lg">
-            RETRO
-          </Badge>
-        </Group>
-        
+        {/* Clock and Search */}
+        <Grid mb="xl" gutter="xl">
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <Clock />
+          </Grid.Col>
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <SearchBar />
+          </Grid.Col>
+        </Grid>
         {/* Settings Button */}
         <Tooltip label="Customize your dashboard" position="bottom">
           <ActionIcon
@@ -104,15 +97,7 @@ export default function HomePage() {
         </Tooltip>
       </Stack>
 
-      {/* Clock and Search */}
-      <Grid mb="xl">
-        <Grid.Col span={{ base: 12, md: 8 }}>
-          <Clock />
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 4 }}>
-          <SearchBar />
-        </Grid.Col>
-      </Grid>
+
 
       {/* Market Watch */}
       <Grid mb="xl">
@@ -134,16 +119,6 @@ export default function HomePage() {
           </Grid.Col>
         ))}
       </Grid>
-
-      {/* Footer */}
-      <Stack align="center" mt="xl" mb="md">
-        <Text size="sm" c="dimmed" ta="center">
-          Your personalized information hub with a nostalgic PS1-era aesthetic
-        </Text>
-        <Text size="xs" c="dimmed" ta="center">
-          Built with Next.js, Mantine, and retro love
-        </Text>
-      </Stack>
 
       {/* Configuration Editor */}
       <ConfigEditor

@@ -28,7 +28,7 @@ export function SearchBar() {
   };
 
   return (
-    <Paper p="md" className="scanline-overlay">
+    <Paper p="md" bg="transparent">
       <form onSubmit={handleSearch}>
         <Group gap="xs">
           <TextInput
@@ -36,31 +36,21 @@ export function SearchBar() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            style={{ flex: 1 }}
-            styles={{
-              input: {
-                fontFamily: 'Share Tech Mono, monospace',
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                border: '2px solid #7c3aed',
-                color: '#e0e0e0',
-                '&:focus': {
-                  borderColor: '#a855f7',
-                  boxShadow: '0 0 15px rgba(124, 58, 237, 0.5)',
-                },
-                '&::placeholder': {
-                  color: '#6b7280',
-                },
-              },
-            }}
+            style={{ flex: 1, border: '1px solid rgba(128,128,128,0.7)', borderRadius: '10px' }}
+            variant="light"
+            rightSection={
+              <Button
+                type="submit"
+                leftSection={<IconSearch size={16} />}
+                className="retro-button"
+                disabled={!query.trim()}
+                bg="transparent"
+                style={{ padding: '0 12px' }}
+              >
+                Search
+              </Button>
+            }
           />
-          <Button
-            type="submit"
-            leftSection={<IconSearch size={16} />}
-            className="retro-button"
-            disabled={!query.trim()}
-          >
-            Search
-          </Button>
         </Group>
       </form>
     </Paper>
