@@ -30,7 +30,6 @@ export function LinkSection({ title, links, color, icon }: LinkSectionProps) {
             key={link.id}
             p="sm"
             style={{ cursor: 'pointer' }}
-            className="retro-button"
             onClick={() => handleLinkClick(link.url)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {

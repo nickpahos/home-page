@@ -8,6 +8,7 @@ import { SearchBar } from '@/components/SearchBar';
 import { MarketWatch } from '@/components/MarketWatch';
 import { LinkSection } from '@/components/LinkSection';
 import { ConfigEditor } from '@/components/ConfigEditor';
+import { PS1Background } from '@/components/PS1Background';
 import { getConfig, AppConfig } from '@/lib/config';
 
 export default function HomePage() {
@@ -66,7 +67,10 @@ export default function HomePage() {
   ];
 
   return (
-    <Container size="xl" py="xl" style={{ minHeight: '100vh', border: 'none' }} bg="transparent">
+    <>
+      {/* Add PS1Background component */}
+      <PS1Background />
+      <Container size="xl" py="xl" style={{ border: 'none', backgroundColor: 'transparent', backdropFilter: 'blur(0px)' }} >
       {/* Header */}
       <Stack align="center" mb="xl" pos="relative">
         {/* Clock and Search */}
@@ -127,5 +131,6 @@ export default function HomePage() {
         onConfigChange={handleConfigChange}
       />
     </Container>
+    </>
   );
 }
